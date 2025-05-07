@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>Pengurus - Gebu Minang Jawa Timur</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Additional styles for the Pengurus page */
+    .org-structure {
+      margin: 40px 0;
+      text-align: center;
+    }
+    
+    .org-chart {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .org-level {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    
+    .org-level::after {
+      content: "";
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 20px;
+      background-color: #6c757d;
+    }
+    
+    .org-level:last-child::after {
+      display: none;
+    }
+    
+    .org-card {
+      width: 280px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      margin: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .org-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .org-card-header {
+      background-color: #6c757d;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    .org-card-header h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+    
+    .org-card-body {
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .org-card-body img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 4px solid #f0f0f0;
+    }
+    
+    .org-card-body h4 {
+      margin: 0 0 5px;
+      font-size: 1.1rem;
+      color: #333;
+    }
+    
+    .org-card-body p {
+      margin: 0;
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+    
+    .org-social {
+      margin-top: 15px;
+    }
+    
+    .org-social a {
+      display: inline-block;
+      margin: 0 5px;
+      color: #6c757d;
+      transition: color 0.3s ease;
+    }
+    
+    .org-social a:hover {
+      color: #343a40;
+    }
+    
+    .org-departments {
+      margin: 60px 0;
+    }
+    
+    .department-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+    
+    .department-tab {
+      padding: 10px 20px;
+      margin: 5px;
+      background-color: #f0f0f0;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .department-tab.active {
+      background-color: #6c757d;
+      color: white;
+    }
+    
+    .department-content {
+      display: none;
+    }
+    
+    .department-content.active {
+      display: block;
+    }
+    
+    .department-members {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .member-card {
+      width: 220px;
+      margin: 15px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    
+    .member-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .member-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    
+    .member-info {
+      padding: 15px;
+      text-align: center;
+    }
+    
+    .member-info h4 {
+      margin: 0 0 5px;
+      font-size: 1rem;
+    }
+    
+    .member-info p {
+      margin: 0;
+      color: #6c757d;
+      font-size: 0.85rem;
+    }
+    
+    .page-banner {
+      background-image: url('https://s3-ap-southeast-1.amazonaws.com/arsitagx-master-article/article-photo/109/unnamed.jpg');
+      background-size: cover;
+      background-position: center;
+      padding: 80px 20px;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+    
+    .page-banner::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+    
+    .page-banner-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .page-banner h1 {
+      font-size: 2.5rem;
+      margin: 0 0 20px;
+    }
+    
+    .breadcrumb {
+      display: flex;
+      justify-content: center;
+    }
+    
+    .breadcrumb a {
+      color: #ddd;
+      text-decoration: none;
+    }
+    
+    .breadcrumb span {
+      margin: 0 10px;
+      color: #ddd;
+    }
+    
+    @media (max-width: 768px) {
+      .org-card {
+        width: 100%;
+        max-width: 280px;
+      }
+      
+      .page-banner h1 {
+        font-size: 2rem;
+      }
+      
+      .department-tab {
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <nav>
+    <div class="container">
+      <div class="nav-content">
+        <div class="logo">
+            <img alt="Rumah Gadang logo" src="logo-removebg-preview.png"/>
+          <h1>GEBU MINANG JAWA TIMUR</h1>
+        </div>
+
+        <div class="desktop-menu">
+          <ul>
+            <li><a href="index.html">BERANDA</a></li>
+            <li><a href="sejarah.html">SEJARAH</a></li>
+            <li><a href="budaya.html">BUDAYA</a></li>
+            <li><a href="pengurus.html">PENGURUS</a></li>
+            <li><a href="galeri.html">GALERI</a></li>
+            <li><a href="kontak.html">KONTAK</a></li>
+          </ul>
+        </div>
+
+        <div class="mobile-menu-button">
+          <button id="mobile-menu-button">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu">
+        <ul>
+          <li><a href="index.html">BERANDA</a></li>
+          <li><a href="sejarah.html">SEJARAH</a></li>
+          <li><a href="budaya.html">BUDAYA</a></li>
+          <li><a href="pengurus.html">PENGURUS</a></li>
+          <li><a href="galeri.html">GALERI</a></li>
+          <li><a href="kontak.html">KONTAK</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <script src="menu.js"></script>
+  
+  <div class="news-ticker-wrapper">
+    <div class="news-ticker">
+      <span>🏠 RUMAH GADANG: KEBANGGAAN MINANGKABAU</span>
+      <span>🏠 KUNJUNGI RUMAH GADANG MINANG SURABAYA</span>
+      <span>🏠 MELESTARIKAN WARISAN BUDAYA INDONESIA</span>
+      <span>🏠 RUMAH ADAT DENGAN ARSITEKTUR UNIK</span>
+      <span>🏠 MENGENAL BUDAYA MATRILINEAL MINANGKABAU</span>
+    </div>
+  </div>
+
+  <div class="page-banner">
+    <div class="page-banner-content">
+      <h1>PENGURUS GEBU MINANG JAWA TIMUR</h1>
+      <div class="breadcrumb">
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+  <section class="org-structure">
+    <div class="container">
+      <div class="section-header">
+        <h2>STRUKTUR KEPENGURUSAN 2025</h2>
+        <div class="divider"></div>
+        <p>Berikut adalah struktur kepengurusan Gebu Minang Jawa Timur periode 2025-2030</p>
+      </div>
+      
+      <div class="org-chart">
+        <!-- Tingkat 1: Ketua -->
+        <div class="org-level">
+          <div class="org-card">
+            <div class="org-card-header">
+              <h3>Ketua Umum</h3>
+            </div>
+            <div class="org-card-body">
+              <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Ketua Umum">
+              <h4>H. Zulyondri, SE</h4>
+              <p>Periode 2025-2030</p>
+              <div class="org-social">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tingkat 2: Wakil Ketua -->
+        <div class="org-level">
+          <div class="org-card">
+            <div class="org-card-header">
+              <h3>Wakil Ketua I</h3>
+            </div>
+            <div class="org-card-body">
+              <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Wakil Ketua I">
+              <h4>Joni, SE</h4>
+              <p>Wakil Ketua I (Kelembagaan)</p>
+              <div class="org-social">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="org-card">
+            <div class="org-card-header">
+              <h3>Wakil Ketua II</h3>
+            </div>
+            <div class="org-card-body">
+              <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Wakil Ketua II">
+              <h4>Zulfri. Dt. Pangulukayo Nan Mudo</h4>
+              <p>Wakil Ketua II (Ekonomi)</p>
+              <div class="org-social">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tingkat 3: Sekretaris & Bendahara -->
+        <div class="org-level">
+          <div class="org-card">
+            <div class="org-card-header">
+              <h3>Sekretaris</h3>
+            </div>
+            <div class="org-card-body">
+              <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Sekretaris Umum">
+              <h4>Sahlan, SH., MH</h4>
+              <p>Sekretaris</p>
+              <div class="org-social">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="org-card">
+            <div class="org-card-header">
+              <h3>Bendahara</h3>
+            </div>
+            <div class="org-card-body">
+              <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Bendahara Umum">
+              <h4>Dra. Hayatun Nufus, M.Pd</h4>
+              <p>Koordinator Keuangan</p>
+              <div class="org-social">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+          
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="org-departments">
+    <div class="container">
+      <div class="section-header">
+        <h2>BIDANG & ANGGOTA</h2>
+        <div class="divider"></div>
+        <p>Gebu Minang Jawa Timur terdiri dari beberapa bidang yang saling berkoordinasi untuk mencapai visi dan misi organisasi</p>
+      </div>
+      
+      <div class="department-tabs">
+        <div class="department-tab active" data-tab="bidang-organisasi">Bidang Organisasi</div>
+        <div class="department-tab " data-tab="bidang-budaya">Bidang Budaya</div>
+        <div class="department-tab " data-tab="bidang-ekonomi">Bidang Ekonomi</div>
+        <div class="department-tab " data-tab="bidang-pendidikan">Bidang Pendidikan</div>
+        <div class="department-tab " data-tab="bidang-sosial">Bidang Sosial</div>
+      </div>
+      
+      <div class="department-content" id="bidang-organisasi">
+        <h3>Bidang Organisasi & Keanggotaan</h3>
+        <p>Bidang ini bertanggung jawab atas struktur organisasi, keanggotaan, dan koordinasi antar bidang di Gebu Minang Jawa Timur.</p>
+        
+        <div class="department-members">
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Ketua Bidang Organisasi">
+            <div class="member-info">
+              <h4>Riki Sumarta Hidayat, SH.,MH.,M.Kn</h4>
+              <p>Ketua Bidang</p>
+            </div>
+          </div>
+          
+          
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Anggota Bidang Organisasi">
+            <div class="member-info">
+              <h4>Deasy Chairunnisa Tamin, SH</h4>
+              <p>Anggota</p>
+            </div>
+          </div>
+          
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Anggota Bidang Organisasi">
+            <div class="member-info">
+              <h4>Achmar Santoso</h4>
+              <p>Anggota</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="department-content" id="bidang-budaya">
+        <h3>Bidang Budaya & Pelestarian</h3>
+        <p>Bidang ini bertanggung jawab atas pelestarian dan pengembangan budaya Minangkabau di Jawa Timur.</p>
+        
+        <div class="department-members">
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Ketua Bidang Budaya">
+            <div class="member-info">
+              <h4>Prof. Dr. Zulkifli Hasan</h4>
+              <p>Ketua Bidang</p>
+            </div>
+          </div>
+          
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Sekretaris Bidang Budaya">
+            <div class="member-info">
+              <h4>Rahmi Adriani, M.Sn.</h4>
+              <p>Sekretaris Bidang</p>
+            </div>
+          </div>
+          
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Anggota Bidang Budaya">
+            <div class="member-info">
+              <h4>Syahrul Ramadhan</h4>
+              <p>Anggota</p>
+            </div>
+          </div>
+          
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Anggota Bidang Budaya">
+            <div class="member-info">
+              <h4>Nadya Puteri</h4>
+              <p>Anggota</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="department-content" id="bidang-ekonomi">
+        <h3>Bidang Ekonomi & Kewirausahaan</h3>
+        <p>Bidang ini bertanggung jawab atas pemberdayaan ekonomi dan pengembangan wirausaha masyarakat Minang di Jawa Timur.</p>
+        
+        <div class="department-members">
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Ketua Bidang Ekonomi">
+            <div class="member-info">
+              <h4>Dr. Surya Darma, M.B.A.</h4>
+              <p>Ketua Bidang</p>
+            </div>
+          </div>
+          
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Sekretaris Bidang Ekonomi">
+            <div class="member-info">
+              <h4>Rini Mardhiyah, S.E.</h4>
+              <p>Sekretaris Bidang</p>
+            </div>
+          </div>
+          
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Anggota Bidang Ekonomi">
+            <div class="member-info">
+              <h4>Randi Putra</h4>
+              <p>Anggota</p>
+            </div>
+          </div>
+          
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Anggota Bidang Ekonomi">
+            <div class="member-info">
+              <h4>Siti Fadilah, S.E.</h4>
+              <p>Anggota</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="department-content" id="bidang-pendidikan">
+        <h3>Bidang Pendidikan & Pengembangan</h3>
+        <p>Bidang ini bertanggung jawab atas pengembangan pendidikan dan pelatihan bagi masyarakat Minang di Jawa Timur.</p>
+        
+        <div class="department-members">
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Ketua Bidang Pendidikan">
+            <div class="member-info">
+              <h4>Dr. Yusrizal, M.Pd.</h4>
+              <p>Ketua Bidang</p>
+            </div>
+          </div>
+          
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Sekretaris Bidang Pendidikan">
+            <div class="member-info">
+              <h4>Mega Putri, M.Ed.</h4>
+              <p>Sekretaris Bidang</p>
+            </div>
+          </div>
+          
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Anggota Bidang Pendidikan">
+            <div class="member-info">
+              <h4>Ahmad Zaki, S.Pd.</h4>
+              <p>Anggota</p>
+            </div>
+          </div>
+          
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Anggota Bidang Pendidikan">
+            <div class="member-info">
+              <h4>Fatimah Azzahra</h4>
+              <p>Anggota</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="department-content" id="bidang-sosial">
+        <h3>Bidang Sosial & Kemasyarakatan</h3>
+        <p>Bidang ini bertanggung jawab atas kegiatan sosial, kemanusiaan, dan hubungan masyarakat Minang dengan masyarakat Jawa Timur.</p>
+        
+        <div class="department-members">
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Ketua Bidang Sosial">
+            <div class="member-info">
+              <h4>Dra. Eliza Yulianti</h4>
+              <p>Ketua Bidang</p>
+            </div>
+          </div>
+          
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Sekretaris Bidang Sosial">
+            <div class="member-info">
+              <h4>Abdul Hakim, S.Sos.</h4>
+              <p>Sekretaris Bidang</p>
+            </div>
+          </div>
+          
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Anggota Bidang Sosial">
+            <div class="member-info">
+              <h4>Rina Safitri</h4>
+              <p>Anggota</p>
+            </div>
+          </div>
+          
+          <div class="member-card">
+            <img src="https://artikel.rumah123.com/wp-content/uploads/sites/41/2023/09/12160753/gambar-foto-profil-whatsapp-kosong.jpg" alt="Anggota Bidang Sosial">
+            <div class="member-info">
+              <h4>Aditya Putra</h4>
+              <p>Anggota</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div class="container">
+      <div class="section-header">
+        <h2>SEJARAH KEPENGURUSAN</h2>
+        <div class="divider"></div>
+        <p>Perjalanan kepemimpinan Gebu Minang Jawa Timur dari masa ke masa</p>
+      </div>
+      
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">
+            <span>2025-2030</span>
+          </div>
+          <div class="timeline-content">
+            <h3>Dr. H. Irwan Prayitno</h3>
+            <p>Di bawah kepemimpinan Dr. H. Irwan Prayitno, Gebu Minang Jawa Timur berfokus pada transformasi digital dan penguatan jaringan ekonomi masyarakat Minang.</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-date">
+            <span>2020-2025</span>
+          </div>
+          <div class="timeline-content">
+            <h3>H. Zulkifli Nurdin</h3>
+            <p>Periode dengan fokus pada pengembangan pendidikan dan pelatihan bagi masyarakat Minang, serta pembangunan Rumah Gadang sebagai pusat budaya.</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-date">
+            <span>2015-2020</span>
+          </div>
+          <div class="timeline-content">
+            <h3>Prof. Dr. Mochtar Naim</h3>
+            <p>Era konsolidasi organisasi dan peningkatan kesejahteraan anggota melalui program-program ekonomi kreatif dan koperasi.</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-date">
+            <span>2010-2015</span>
+          </div>
+          <div class="timeline-content">
+            <h3>H. Bustamam Ibrahim</h3>
+            <p>Masa penguatan pondasi organisasi dan pembentukan jaringan Gebu Minang di seluruh wilayah Jawa Timur.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+            <img alt="Rumah Gadang logo" src="logo-removebg-preview.png" width="100" />
+          <p>Rumah Gadang adalah rumah adat Minangkabau yang memiliki arsitektur unik dengan atap berbentuk tanduk kerbau. Situs ini didedikasikan untuk melestarikan dan mempromosikan warisan budaya Minangkabau.</p>
+          <div class="social-media">
+            <a href="#" aria-label="Facebook">Facebook</a>
+            <a href="#" aria-label="Instagram">Instagram</a>
+            <a href="#" aria-label="Twitter">Twitter</a>
+            <a href="#" aria-label="YouTube">YouTube</a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h3>TAUTAN</h3>
+          <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="sejarah.html">Sejarah</a></li>
+            <li><a href="budaya.html">Budaya</a></li>
+            <li><a href="pengurus.html">Pengurus</a></li>
+            <li><a href="galeri.html">Galeri</a></li>
+            <li><a href="kontak.html">Kontak</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-contact">
+          <h3>KONTAK</h3>
+          <ul>
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Jl. Gayungan Kebonsari Jawa Timur</span>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <span>+62 812 3456 7890</span>
+
+              <script>
+                // Ambil semua tab
+                const tabs = document.querySelectorAll('.department-tab');
+                const contents = document.querySelectorAll('.department-content');
+              
+                tabs.forEach(tab => {
+                  tab.addEventListener('click', () => {
+                    const targetId = tab.getAttribute('data-tab');
+              
+                    // Hilangkan "active" dari semua tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+              
+                    // Sembunyikan semua konten
+                    contents.forEach(content => {
+                      content.style.display = 'none';
+                    });
+              
+                    // Tampilkan konten yang sesuai
+                    const targetContent = document.getElementById(targetId);
+                    if (targetContent) {
+                      targetContent.style.display = 'block';
+                    }
+                  });
+                });
+              
+                // Inisialisasi: tampilkan hanya tab yang aktif saat awal
+                window.addEventListener('DOMContentLoaded', () => {
+                  contents.forEach(content => content.style.display = 'none');
+                  const activeTab = document.querySelector('.department-tab.active');
+                  if (activeTab) {
+                    const activeContent = document.getElementById(activeTab.getAttribute('data-tab'));
+                    if (activeContent) {
+                      activeContent.style.display = 'block';
+                    }
+                  }
+                });
+              </script>
+              

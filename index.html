@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>Gebu Minang Jawa Timur</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <nav>
+    <div class="container">
+      <div class="nav-content">
+        <div class="logo">
+          <img alt="Rumah Gadang logo" src="logo-removebg-preview.png"/>
+          <h1>GEBU MINANG JAWA TIMUR</h1>
+        </div>
+
+        <div class="desktop-menu">
+          <ul>
+            <li><a href="index.html">BERANDA</a></li>
+            <li><a href="sejarah.html">SEJARAH</a></li>
+            <li><a href="budaya.html">BUDAYA</a></li>
+            <li><a href="pengurus.html">PENGURUS</a></li>
+            <li><a href="galeri.html">GALERI</a></li>
+            <li><a href="kontak.html">KONTAK</a></li>
+          </ul>
+        </div>
+
+        <div class="mobile-menu-button">
+          <button id="mobile-menu-button">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu">
+        <ul>
+          <li><a href="index.html">BERANDA</a></li>
+          <li><a href="sejarah.html">SEJARAH</a></li>
+          <li><a href="budaya.html">BUDAYA</a></li>
+          <li><a href="pengurus.html">PENGURUS</a></li>
+          <li><a href="galeri.html">GALERI</a></li>
+          <li><a href="kontak.html">KONTAK</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <script src="menu.js"></script>
+
+  <div class="news-ticker-wrapper">
+    <div class="news-ticker">
+      <span>🏠 RUMAH GADANG: KEBANGGAAN MINANGKABAU</span>
+      <span>🏠 KUNJUNGI RUMAH GADANG MINANG SURABAYA</span>
+      <span>🏠 MELESTARIKAN WARISAN BUDAYA INDONESIA</span>
+      <span>🏠 RUMAH ADAT DENGAN ARSITEKTUR UNIK</span>
+      <span>🏠 MENGENAL BUDAYA MATRILINEAL MINANGKABAU</span>
+    </div>
+  </div>
+
+  <style>
+    .hero-image {
+      background-image: url('https://s3-ap-southeast-1.amazonaws.com/arsitagx-master-article/article-photo/109/unnamed.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 100px 20px;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+  
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      z-index: 2;
+      position: relative;
+    }
+  
+    .hero-image::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.5); /* efek overlay gelap agar teks lebih jelas */
+      z-index: 1;
+    }
+  
+    .hero-buttons a {
+      margin: 10px;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+    }
+  
+    .btn-primary {
+      background-color: #6c757d;
+      color: white;
+    }
+  
+    .btn-secondary {
+      background-color: #6c757d;
+      color: white;
+    }
+  </style>
+  
+  <div class="hero-image">
+    <div class="hero-content">
+      <h1 id="hero-title">GEBU MINANG JAWA TIMUR</h1>
+      <p id="hero-subtitle">ORGANISASI PENYATU MASYARAKAT MINANG DI SURABAYA</p>
+      <div class="hero-buttons">
+        <a href="galeri.html" class="btn btn-primary">GALERI</a>
+        <a href="#info-terbaru" class="btn btn-secondary">INFO TERBARU</a>
+      </div>
+    </div>
+  </div>
+  
+  
+    <img src="/api/placeholder/80/80" alt="" class="floating-element" style="top: 20%; left: 15%;">
+    <img src="/api/placeholder/80/80" alt="" class="floating-element" style="top: 30%; right: 20%; animation-delay: 2s;">
+    <img src="/api/placeholder/80/80" alt="" class="floating-element" style="bottom: 25%; left: 25%; animation-delay: 1s;">
+    <img src="/api/placeholder/80/80" alt="" class="floating-element" style="bottom: 20%; right: 15%; animation-delay: 3s;">
+  </div>
+
+  <section id="info-terbaru">
+    <div class="container">
+      <div class="section-header">
+        <h2>INFO TERBARU</h2>
+        <div class="divider"></div>
+      </div>
+      
+      <div class="info-cards">
+        <div class="info-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Budaya_Menyambut_Tamu_di_Minangkabau.jpg" alt="Festival Rumah Gadang">
+          <div class="card-content">
+            <span class="date">12 April 2025</span>
+            <h3>Festival Rumah Gadang 2025</h3>
+            <p>Festival tahunan yang menampilkan keindahan dan keunikan Rumah Gadang di berbagai daerah Sumatera Barat.</p>
+            <a href="artikel.html">BACA SELENGKAPNYA <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
+          </div>
+        </div>
+        
+        <!-- Info Card 2 -->
+        <div class="info-card">
+          <img src="logo revisi_page-0001 (1).jpg" alt="Konservasi Rumah Gadang">
+          <div class="card-content">
+            <span class="date">10 Mei 2025</span>
+            <h3>Alek Rang Mudo</h3>
+            <p>Kegiatan merupakan jawaban Imami Surabaya terhadap pelestarian kesenian dan kebudayaan sebagai mana yang ada dalam pepatah"manjulang ka rantau, mangaka ka kampuang".</p>
+            <a href="artikel1.html">BACA SELENGKAPNYA <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
+          </div>
+        </div>
+        
+        <!-- Info Card 3 -->
+        <div class="info-card">
+          <img src="https://dalamislam.com/wp-content/uploads/2019/05/b302056c-ikustrasi-halal-bihalal.jpg" alt="Workshop Ukiran Gadang">
+          <div class="card-content">
+            <span class="date">10 Mei 2025</span>
+            <h3>Halal bihalal</h3>
+            <p>Halal bihalal merupakan suatu acara yang diadakan untuk mempererat silaturahmi kekeluargaan anggota gebu dan masyarakat minang di Surabaya.</p>
+            <a href="artikel2.html">BACA SELENGKAPNYA <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="more-info-button">
+        <a href="#" class="btn btn-primary">LIHAT SEMUA INFO</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="tour-virtual">
+    <div class="container">
+      <div class="section-header">
+        <h2>TOUR RUMAH GADANG MINANG JAWA TIMUR</h2>
+        <div class="divider"></div>
+      </div>
+  
+      <div class="tour-content">
+        <div class="tour-video">
+          <div class="video-container">
+            <iframe width="560" height="315"
+              src="https://www.youtube.com/embed/ouJGv-H3Exs"
+              title="Tour Virtual Rumah Gadang"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+  
+        <div class="tour-info">
+          <h3>Jelajahi Rumah Gadang Minang Jawa Timur</h3>
+          <p>
+            Nikmati pengalaman mengunjungi Rumah Gadang secara virtual dengan teknologi 360° yang memungkinkan Anda menjelajahi setiap sudut bangunan tradisional ini.
+          </p>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> Eksplorasi 360° dengan kualitas gambar tinggi</li>
+            <li><i class="fas fa-check-circle"></i> Informasi detail tentang setiap ruangan dan ornamen</li>
+            <li><i class="fas fa-check-circle"></i> Narasi audio dalam Bahasa Indonesia dan Inggris</li>
+            <li><i class="fas fa-check-circle"></i> Akses dari perangkat apa saja, kapan saja</li>
+          </ul>
+          <a href="galeri.html" class="btn btn-outline">MULAI TOUR VIRTUAL</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <section id="stats">
+    <div class="container">
+      <div class="section-header">
+        <h2>FAKTA MENARIK</h2>
+        <div class="divider"></div>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">100+</div>
+          <h3>Rumah Gadang</h3>
+          <p>Rumah Gadang bersejarah yang dapat dikunjungi di Sumatera Barat</p>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-number">7</div>
+          <h3>Warisan Budaya</h3>
+          <p>Elemen budaya Minangkabau yang diakui sebagai warisan budaya tak benda</p>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-number">300+</div>
+          <h3>Motif Ukiran</h3>
+          <p>Motif ukiran tradisional yang digunakan dalam dekorasi Rumah Gadang</p>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-number">25K+</div>
+          <h3>Pengunjung</h3>
+          <p>Wisatawan yang berkunjung ke situs Rumah Gadang setiap tahunnya</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <h2>GALERI IMAMI SURABAYA</h2>
+        <div class="divider"></div>
+      </div>
+      
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="1.jpg" alt="ACARA 1">
+        </div>
+        <div class="gallery-item">
+          <img src="2.jpg" alt="ACARA 2">
+        </div>
+        <div class="gallery-item">
+          <img src="3.jpg" alt="ACARA 3">
+        </div>
+        <div class="gallery-item">
+          <img src="4.jpg" alt="ACARA 4">
+        </div>
+        <div class="gallery-item">
+          <img src="5.jpg" alt="ACARA 5">
+        </div>
+        <div class="gallery-item">
+          <img src="6.jpg" alt="ACARA 6">
+        </div>
+        <div class="gallery-item">
+            <img src="7.jpg" alt="ACARA 7">
+          </div>
+        <div class="gallery-item">
+            <img src="8.jpg" alt="ACARA 8">
+          </div>
+      </div>
+      
+      <div class="gallery-more">
+        <a href="galeri.html" class="btn btn-secondary">LIHAT LEBIH BANYAK</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <h2>APA KATA MEREKA</h2>
+        <div class="divider"></div>
+      </div>
+      
+      <div class="testimonial-slider">
+        <div class="testimonial-card">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <span>5.0</span>
+          </div>
+          <p>"Pengalaman berkunjung ke Rumah Gadang sangat mengesankan. Arsitekturnya yang unik dan filosofi budaya di dalamnya membuat saya semakin bangga dengan kekayaan budaya Indonesia."</p>
+          <div class="testimonial-author">
+            <div class="author-info">
+              <h4>Budi Santoso</h4>
+              <p>Pengunjung dari Jakarta</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>4.5</span>
+          </div>
+          <p>"Tour virtual Rumah Gadang memberikan pengalaman yang hampir sama dengan mengunjungi langsung. Detail-detail yang disajikan sangat informatif dan membantu penelitian saya."</p>
+          <div class="testimonial-author">
+            <div class="author-info">
+              <h4>Anita Wijaya</h4>
+              <p>Peneliti Budaya</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <span>5.0</span>
+          </div>
+          <p>"Workshop ukiran tradisional Minangkabau yang saya ikuti membuka mata saya tentang ketelitian dan filosofi di balik setiap motif ukiran pada Rumah Gadang. Sangat berharga!"</p>
+          <div class="testimonial-author">
+            <div class="author-info">
+              <h4>Rendi Pratama</h4>
+              <p>Mahasiswa Seni</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+            <img alt="Rumah Gadang logo" src="logo-removebg-preview.png" width="100" />
+          <p>Rumah Gadang adalah rumah adat Minangkabau yang memiliki arsitektur unik dengan atap berbentuk tanduk kerbau. Situs ini didedikasikan untuk melestarikan dan mempromosikan warisan budaya Minangkabau.</p>
+          <div class="social-media">
+            <a href="#" aria-label="Facebook">Facebook</a>
+            <a href="#" aria-label="Instagram">Instagram</a>
+            <a href="#" aria-label="Twitter">Twitter</a>
+            <a href="#" aria-label="YouTube">YouTube</a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h3>TAUTAN</h3>
+          <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="sejarah.html">Sejarah</a></li>
+            <li><a href="budaya.html">Budaya</a></li>
+            <li><a href="pengurus.html">Pengurus</a></li>
+            <li><a href="galeri.html">Galeri</a></li>
+            <li><a href="kontak.html">Kontak</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-contact">
+          <h3>KONTAK</h3>
+          <ul>
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Jl. Gayungan Kebonsari Jawa Timur</span>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <span>+62 812 3456 7890</span>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <span>@imami.surabaya</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="footer-newsletter">
+          <h3>NEWSLETTER</h3>
+          <p>Berlangganan newsletter kami untuk mendapatkan informasi terbaru tentang Rumah Gadang dan budaya Minangkabau.</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Email Anda" required>
+            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Rumah Gadang. Hak Cipta Dilindungi.</p>
+        <div class="footer-legal">
+          <a href="#">Kebijakan Privasi</a>
+          <a href="#">Syarat & Ketentuan</a>
+          <a href="#">Peta Situs</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

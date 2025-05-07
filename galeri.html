@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>Galeri - Gebu Minang Jawa Timur</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Gallery Page Specific Styles */
+    .gallery-container {
+      padding: 40px 0;
+    }
+    
+    .gallery-filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+    
+    .gallery-filter-btn {
+      background-color: #f5f5f5;
+      border: none;
+      padding: 8px 20px;
+      margin: 5px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .gallery-filter-btn:hover,
+    .gallery-filter-btn.active {
+      background-color: #6c757d;
+      color: white;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      height: 250px;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      padding: 20px;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+    
+    .gallery-overlay h3 {
+      margin: 0 0 5px 0;
+      font-size: 18px;
+    }
+    
+    .gallery-overlay p {
+      margin: 0;
+      font-size: 14px;
+    }
+    
+    .gallery-pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    
+    .page-number {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      margin: 0 5px;
+      border-radius: 50%;
+      background-color: #f5f5f5;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .page-number:hover,
+    .page-number.active {
+      background-color: #6c757d;
+      color: white;
+    }
+    
+    .gallery-lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    
+    .lightbox-content {
+      position: relative;
+      max-width: 80%;
+      max-height: 80%;
+    }
+    
+    .lightbox-content img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+    }
+    
+    .lightbox-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+    }
+    
+    .lightbox-caption {
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: white;
+    }
+    
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    
+    .lightbox-nav button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px;
+      margin: 0 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+      
+      .gallery-item {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <nav>
+    <div class="container">
+      <div class="nav-content">
+        <div class="logo">
+            <img alt="Rumah Gadang logo" src="logo-removebg-preview.png"/>
+          <h1>GEBU MINANG JAWA TIMUR</h1>
+        </div>
+
+        <div class="desktop-menu">
+          <ul>
+            <li><a href="index.html">BERANDA</a></li>
+            <li><a href="sejarah.html">SEJARAH</a></li>
+            <li><a href="budaya.html">BUDAYA</a></li>
+            <li><a href="pengurus.html">PENGURUS</a></li>
+            <li><a href="galeri.html">GALERI</a></li>
+            <li><a href="kontak.html">KONTAK</a></li>
+          </ul>
+        </div>
+
+        <div class="mobile-menu-button">
+          <button id="mobile-menu-button">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu">
+        <ul>
+          <li><a href="index.html">BERANDA</a></li>
+          <li><a href="sejarah.html">SEJARAH</a></li>
+          <li><a href="budaya.html">BUDAYA</a></li>
+          <li><a href="pengurus.html">PENGURUS</a></li>
+          <li><a href="galeri.html">GALERI</a></li>
+          <li><a href="kontak.html">KONTAK</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <script src="menu.js"></script>
+  
+  <div class="news-ticker-wrapper">
+    <div class="news-ticker">
+      <span>🏠 RUMAH GADANG: KEBANGGAAN MINANGKABAU</span>
+      <span>🏠 KUNJUNGI RUMAH GADANG MINANG SURABAYA</span>
+      <span>🏠 MELESTARIKAN WARISAN BUDAYA INDONESIA</span>
+      <span>🏠 RUMAH ADAT DENGAN ARSITEKTUR UNIK</span>
+      <span>🏠 MENGENAL BUDAYA MATRILINEAL MINANGKABAU</span>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <div class="hero-content">
+      <h1 id="hero-title">GALERI</h1>
+      <p id="hero-subtitle">DOKUMENTASI KEGIATAN DAN BUDAYA MINANGKABAU</p>
+    </div>
+  </div>
+
+  <section class="gallery-container">
+    <div class="container">
+      <div class="section-header">
+        <h2>KOLEKSI FOTO</h2>
+        <div class="divider"></div>
+      </div>
+    
+      <div class="gallery-filters">
+        <button class="gallery-filter-btn active" data-filter="semua">Semua</button>
+        <button class="gallery-filter-btn" data-filter="kegiatan">Kegiatan</button>
+        <button class="gallery-filter-btn" data-filter="budaya">Budaya</button>
+        <button class="gallery-filter-btn" data-filter="rumah-gadang">Rumah Gadang</button>
+        <button class="gallery-filter-btn" data-filter="kuliner">Kuliner</button>
+      </div>
+      
+      <div class="gallery-grid">
+        <!-- Kegiatan -->
+        <div class="gallery-item" data-category="kegiatan">
+          <img src="1.jpg" alt="Pertemuan Anggota">
+          <div class="gallery-overlay">
+            <h3>Pertemuan Anggota</h3>
+            <p>Maret 2025 - Surabaya</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="kegiatan">
+          <img src="2.jpg" alt="Kegiatan Sosial">
+          <div class="gallery-overlay">
+            <h3>Kegiatan Sosial</h3>
+            <p>Februari 2025 - Sidoarjo</p>
+          </div>
+        </div>
+        
+        <!-- Budaya -->
+        <div class="gallery-item" data-category="budaya">
+          <img src="3.jpg" alt="Tari Tradisional">
+          <div class="gallery-overlay">
+            <h3>Tari Tradisional</h3>
+            <p>Festival Budaya 2025</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="budaya">
+          <img src="4.jpg" alt="Upacara Adat">
+          <div class="gallery-overlay">
+            <h3>Upacara Adat</h3>
+            <p>Tradisi Minangkabau</p>
+          </div>
+        </div>
+        
+        <!-- Rumah Gadang -->
+        <div class="gallery-item" data-category="rumah-gadang">
+          <img src="https://s3-ap-southeast-1.amazonaws.com/arsitagx-master-article/article-photo/109/unnamed.jpg" alt="Rumah Gadang Tradisional">
+          <div class="gallery-overlay">
+            <h3>Rumah Gadang Tradisional</h3>
+            <p>Arsitektur Khas Minangkabau</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="rumah-gadang">
+          <img src="https://s3-ap-southeast-1.amazonaws.com/arsitagx-master-article/article-photo/109/unnamed.jpg" alt="Detail Ukiran">
+          <div class="gallery-overlay">
+            <h3>Detail Ukiran</h3>
+            <p>Seni Ukir Tradisional</p>
+          </div>
+        </div>
+        
+        <!-- Kuliner -->
+        <div class="gallery-item" data-category="kuliner">
+          <img src="https://jabarekspres.com/wp-content/uploads/2023/04/WhatsApp-Image-2023-04-20-at-11.35.35.jpg" alt="Rendang">
+          <div class="gallery-overlay">
+            <h3>Rendang</h3>
+            <p>Kuliner Khas Minangkabau</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="kuliner">
+          <img src="https://asset.kompas.com/crops/hCbVquVhkYe2q3RO7e6CSH2XUH0=/0x0:1000x667/1200x800/data/photo/2021/03/28/60607a72127cd.jpg" alt="Sate Padang">
+          <div class="gallery-overlay">
+            <h3>Sate Padang</h3>
+            <p>Kuliner Favorit</p>
+          </div>
+        </div>
+        
+        <!-- More items -->
+        <div class="gallery-item" data-category="kegiatan">
+          <img src="https://biro-organisasi.gorontaloprov.go.id/images/WhatsApp_Image_2021-03-08_at_093853.jpeg" alt="Workshop Ukiran">
+          <div class="gallery-overlay">
+            <h3>Workshop Ukiran</h3>
+            <p>April 2025 - Surabaya</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="budaya">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Budaya_Menyambut_Tamu_di_Minangkabau.jpg" alt="Pakaian Adat">
+          <div class="gallery-overlay">
+            <h3>Pakaian Adat</h3>
+            <p>Warisan Minangkabau</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="rumah-gadang">
+          <img src="https://s3-ap-southeast-1.amazonaws.com/arsitagx-master-article/article-photo/109/unnamed.jpg" alt="Interior Rumah Gadang">
+          <div class="gallery-overlay">
+            <h3>Interior Rumah Gadang</h3>
+            <p>Desain Interior Tradisional</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="kuliner">
+          <img src="https://cdn.yummy.co.id/content-images/images/20200805/9rXPskgWtwQzauJYaZtylDO0Y5P5Rlav-31353936363136343338d41d8cd98f00b204e9800998ecf8427e.jpg?x-oss-process=image/format,webp" alt="Gulai">
+          <div class="gallery-overlay">
+            <h3>Gulai</h3>
+            <p>Masakan Khas Padang</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="gallery-pagination">
+        <a href="#" class="page-number active">1</a>
+        <a href="#" class="page-number">2</a>
+        <a href="#" class="page-number">3</a>
+        <a href="#" class="page-number">4</a>
+        <a href="#" class="page-number"><i class="fas fa-angle-right"></i></a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Perbaikan Bagian Video -->
+<section class="gallery-container">
+    <div class="container">
+      <div class="section-header">
+        <h2>VIDEO DOKUMENTASI</h2>
+        <div class="divider"></div>
+      </div>
+      
+      <div class="gallery-grid">
+        <!-- Video item 1 -->
+        <div class="gallery-item" data-category="video" onclick="playVideo('Video WhatsApp 2025-05-06 pukul 23.32.40_76ab36db.mp4')">
+          <img src="7.jpg" alt="Dokumentasi pembukaan">
+          <div class="gallery-overlay">
+            <h3>Pihak gebu minang</h3>
+            <p>Dokumentasi Pembukaan</p>
+            <i class="fas fa-play-circle" style="font-size: 28px; margin-top: 10px;"></i>
+          </div>
+        </div>
+        
+        <!-- Video item 2 -->
+        <div class="gallery-item" data-category="video" onclick="playVideo('pelantikan.mp4')">
+          <img src="55.jpg" alt="Video Upacara Adat">
+          <div class="gallery-overlay">
+            <h3>Pelantikan</h3>
+            <p>Dokumentasi Pelantikan</p>
+            <i class="fas fa-play-circle" style="font-size: 28px; margin-top: 10px;"></i>
+          </div>
+        </div>
+        
+        <!-- Video item 3 -->
+        <div class="gallery-item" data-category="video" onclick="playVideo('pengukuhan.mp4')">
+            <img src="pengukuhan.jpg" alt="Video Tour Rumah Gadang">
+            <div class="gallery-overlay">
+              <h3>Pengukuhan</h3>
+              <p>Dokumentasi Pengukuhan</p>
+              <i class="fas fa-play-circle" style="font-size: 28px; margin-top: 10px;"></i>
+            </div>
+          </div>  
+        
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Modal Video (Diletakkan di luar section) -->
+  <div id="videoModal" class="video-modal">
+    <div class="video-modal-content">
+      <span class="video-close" onclick="closeVideo()">&times;</span>
+      <video id="videoPlayer" controls playsinline></video>
+    </div>
+  </div>
+  
+  <!-- Tambahkan CSS di bagian style untuk modal video -->
+  <style>
+    .video-modal {
+      display: none;
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.9);
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .video-modal-content {
+      position: relative;
+      width: 80%;
+      max-width: 800px;
+    }
+    
+    .video-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: #fff;
+      font-size: 35px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    #videoPlayer {
+      width: 100%;
+      max-height: 80vh;
+    }
+  </style>
+  
+  <!-- Script untuk menangani pemutaran video -->
+  <script>
+    function playVideo(videoSrc) {
+      const modal = document.getElementById("videoModal");
+      const player = document.getElementById("videoPlayer");
+      player.src = videoSrc;
+      modal.style.display = "flex";
+      player.play();
+    }
+  
+    function closeVideo() {
+      const modal = document.getElementById("videoModal");
+      const player = document.getElementById("videoPlayer");
+      player.pause();
+      player.src = "";
+      modal.style.display = "none";
+    }
+    
+    // Menutup modal saat klik di luar konten video
+    window.addEventListener("click", function(event) {
+      const modal = document.getElementById("videoModal");
+      if (event.target == modal) {
+        closeVideo();
+      }
+    });
+  </script>
+
+  <!-- Lightbox for Images -->
+  <div class="gallery-lightbox" id="gallery-lightbox">
+    <div class="lightbox-content">
+      <span class="lightbox-close">&times;</span>
+      <img src="" alt="Enlarged Image" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+      <div class="lightbox-nav">
+        <button class="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="lightbox-next"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+            <img alt="Rumah Gadang logo" src="logo-removebg-preview.png" width="100" />
+          <p>Rumah Gadang adalah rumah adat Minangkabau yang memiliki arsitektur unik dengan atap berbentuk tanduk kerbau. Situs ini didedikasikan untuk melestarikan dan mempromosikan warisan budaya Minangkabau.</p>
+          <div class="social-media">
+            <a href="#" aria-label="Facebook">Facebook</a>
+            <a href="#" aria-label="Instagram">Instagram</a>
+            <a href="#" aria-label="Twitter">Twitter</a>
+            <a href="#" aria-label="YouTube">YouTube</a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h3>TAUTAN</h3>
+          <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="sejarah.html">Sejarah</a></li>
+            <li><a href="budaya.html">Budaya</a></li>
+            <li><a href="pengurus.html">Pengurus</a></li>
+            <li><a href="galeri.html">Galeri</a></li>
+            <li><a href="kontak.html">Kontak</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-contact">
+          <h3>KONTAK</h3>
+          <ul>
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Jl. Gayungan Kebonsari Jawa Timur</span>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <span>+62 812 3456 7890</span>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <span>@imami.surabaya</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="footer-newsletter">
+          <h3>NEWSLETTER</h3>
+          <p>Berlangganan newsletter kami untuk mendapatkan informasi terbaru tentang Rumah Gadang dan budaya Minangkabau.</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Email Anda" required>
+            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Rumah Gadang. Hak Cipta Dilindungi.</p>
+        <div class="footer-legal">
+          <a href="#">Kebijakan Privasi</a>
+          <a href="#">Syarat & Ketentuan</a>
+          <a href="#">Peta Situs</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('active');
+    });
+    
+    // Gallery Filter
+    const filterButtons = document.querySelectorAll('.gallery-filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to clicked button
+        button.classList.add('active');
+        
+        const filterValue = button.getAttribute('data-filter');
+        
+        galleryItems.forEach(item => {
+          if (filterValue === 'semua' || item.getAttribute('data-category') === filterValue) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+    
+    // Lightbox functionality
+    const lightbox = document.getElementById('gallery-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    const lightboxPrev = document.querySelector('.lightbox-prev');
+    const lightboxNext = document.querySelector('.lightbox-next');
+    
+    let currentIndex = 0;
+    const galleryImages = Array.from(document.querySelectorAll('.gallery-item:not([data-category="video"]) img'));
+    
+    // Open lightbox
+    galleryItems.forEach((item, index) => {
+      item.addEventListener('click', () => {
+        const imgSrc = item.querySelector('img').src;
+        const caption = item.querySelector('.gallery-overlay h3').textContent;
+        
+        lightboxImg.src = imgSrc;
+        lightboxCaption.textContent = caption;
+        lightbox.style.display = 'flex';
+        
+        currentIndex = index;
+      });
+    });
+    
+    // Close lightbox
+    lightboxClose.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+    });
+    
+    // Click outside to close
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.style.display = 'none';
+      }
+    });
+    
+    // Next image
+    lightboxNext.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      const nextItem = galleryItems[currentIndex];
+      lightboxImg.src = nextItem.querySelector('img').src;
+      lightboxCaption.textContent = nextItem.querySelector('.gallery-overlay h3').textContent;
+    });
+    
+    // Previous image
+    lightboxPrev.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      const prevItem = galleryItems[currentIndex];
+      lightboxImg.src = prevItem.querySelector('img').src;
+      lightboxCaption.textContent = prevItem.querySelector('.gallery-overlay h3').textContent;
+    });
+    
+    
+    window.addEventListener('mousemove', function(e) {
+      const posX = e.clientX;
+      const posY = e.clientY;
+      
+      cursorDot.style.left = `${posX}px`;
+      cursorDot.style.top = `${posY}px`;
+      
+      cursorOutline.style.left = `${posX}px`;
+      cursorOutline.style.top = `${posY}px`;
+    });
+  </script>
+  <script>
+    const pageLinks = document.querySelectorAll('.page-number');
+  
+    pageLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault(); // ⛔ Cegah reload halaman
+  
+        // Hapus 'active' dari semua page number
+        pageLinks.forEach(l => l.classList.remove('active'));
+  
+        // Tambahkan 'active' ke halaman yang diklik
+        this.classList.add('active');
+  
+        // Kamu bisa tambahkan logika pagination di sini:
+        const pageNum = this.textContent.trim();
+        console.log("Halaman:", pageNum);
+  
+        // Tampilkan item sesuai halaman, kalau pakai sistem paging
+        // (Silakan tambahkan logika sesuai struktur gallery-mu)
+      });
+    });
+  </script>
+  
+</body>
+</html>
+
+<script>
+function playVideo(videoSrc) {
+  const modal = document.getElementById("videoModal");
+  const player = document.getElementById("videoPlayer");
+  player.src = videoSrc;
+  modal.style.display = "flex";
+  player.play();
+}
+
+function closeVideo() {
+  const modal = document.getElementById("videoModal");
+  const player = document.getElementById("videoPlayer");
+  player.pause();
+  player.src = "";
+  modal.style.display = "none";
+}
+</script>
+
+<!-- Perbaikan Lightbox untuk Galeri Foto -->
+<!-- Struktur HTML untuk Lightbox -->
+<div class="gallery-lightbox" id="gallery-lightbox">
+    <div class="lightbox-content">
+      <span class="lightbox-close">&times;</span>
+      <img src="" alt="Gambar Diperbesar" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+      <div class="lightbox-nav">
+        <button class="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="lightbox-next"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- CSS untuk Lightbox yang Diperbaiki -->
+  <style>
+    .gallery-lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    
+    .lightbox-content {
+      position: relative;
+      width: 95%;
+      max-width: 1600px;
+      height: auto;
+      text-align: center;
+    }
+    
+    #lightbox-img {
+      max-width: 95%;
+      max-height: 90vh;
+      object-fit: contain;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      transform: scale(0.9);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      width: auto;
+      height: auto;
+    }
+    
+    .lightbox-active #lightbox-img {
+      transform: scale(1);
+      opacity: 1;
+      width: auto;
+      min-width: 60%;
+      min-height: 60vh;
+    }
+    
+    .lightbox-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: white;
+      font-size: 35px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      z-index: 1002;
+    }
+    
+    .lightbox-close:hover {
+      color: #f44336;
+    }
+    
+    .lightbox-caption {
+      position: absolute;
+      bottom: -60px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: white;
+      font-size: 18px;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 5px;
+    }
+    
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    
+    .lightbox-nav button {
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 15px;
+      margin: 0 20px;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+    
+    .lightbox-nav button:hover {
+      background: rgba(0, 0, 0, 0.8);
+      transform: scale(1.1);
+    }
+    
+    /* Animasi loading untuk gambar */
+    @keyframes lightbox-loading {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .lightbox-loading::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 50px;
+      height: 50px;
+      margin: -25px 0 0 -25px;
+      border: 4px solid rgba(255, 255, 255, 0.2);
+      border-top: 4px solid white;
+      border-radius: 50%;
+      animation: lightbox-loading 1s linear infinite;
+    }
+    
+    /* Responsif untuk perangkat mobile */
+    @media (max-width: 768px) {
+      .lightbox-content {
+        width: 95%;
+      }
+      
+      .lightbox-nav button {
+        padding: 10px;
+        width: 40px;
+        height: 40px;
+        margin: 0 10px;
+        font-size: 18px;
+      }
+    }
+  </style>
+  
+  <!-- JavaScript untuk Lightbox yang Diperbaiki -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Variabel untuk lightbox
+      const lightbox = document.getElementById('gallery-lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      const lightboxClose = document.querySelector('.lightbox-close');
+      const lightboxPrev = document.querySelector('.lightbox-prev');
+      const lightboxNext = document.querySelector('.lightbox-next');
+      
+      // Koleksi elemen galeri
+      const galleryItems = document.querySelectorAll('.gallery-item:not([data-category="video"])');
+      let currentIndex = 0;
+      
+      // Menambahkan event listener untuk setiap item galeri
+      galleryItems.forEach((item, index) => {
+        item.addEventListener('click', (e) => {
+          // Memastikan event tidak terpicu pada video
+          if (item.getAttribute('data-category') === 'video') return;
+          
+          e.preventDefault();
+          currentIndex = index;
+          openLightbox(item);
+        });
+      });
+      
+      // Fungsi untuk membuka lightbox
+      function openLightbox(item) {
+        const imgElement = item.querySelector('img');
+        const imgSrc = imgElement.src;
+        const captionElement = item.querySelector('.gallery-overlay h3');
+        const caption = captionElement ? captionElement.textContent : '';
+        const subCaption = item.querySelector('.gallery-overlay p') ? item.querySelector('.gallery-overlay p').textContent : '';
+        
+        // Menambahkan kelas loading
+        lightbox.classList.add('lightbox-loading');
+        
+        // Menetapkan sumber gambar dan caption
+        lightboxImg.src = imgSrc;
+        lightboxCaption.textContent = caption + (subCaption ? ' - ' + subCaption : '');
+        
+        // Menampilkan lightbox
+        lightbox.style.display = 'flex';
+        
+        // Menambahkan efek transisi setelah gambar dimuat
+        lightboxImg.onload = function() {
+          // Mendapatkan dimensi asli gambar
+          const imgWidth = this.naturalWidth;
+          const imgHeight = this.naturalHeight;
+          
+          // Menyesuaikan gambar agar tampil sebesar mungkin
+          if (imgWidth > window.innerWidth * 0.6 || imgHeight > window.innerHeight * 0.8) {
+            // Gambar besar, biarkan max-width/max-height mengendalikannya
+          } else {
+            // Gambar kecil, kita perbesar
+            this.style.width = Math.min(imgWidth * 1.5, window.innerWidth * 0.8) + 'px';
+          }
+          
+          lightbox.classList.remove('lightbox-loading');
+          setTimeout(() => {
+            lightbox.classList.add('lightbox-active');
+          }, 50);
+        };
+      }
+      
+      // Fungsi untuk menutup lightbox
+      function closeLightbox() {
+        lightbox.classList.remove('lightbox-active');
+        setTimeout(() => {
+          lightbox.style.display = 'none';
+        }, 300);
+      }
+      
+      // Event listener untuk tombol tutup
+      lightboxClose.addEventListener('click', closeLightbox);
+      
+      // Event listener untuk klik di luar gambar
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+      
+      // Event listener untuk navigasi gambar sebelumnya
+      lightboxPrev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navigateGallery(-1);
+      });
+      
+      // Event listener untuk navigasi gambar berikutnya
+      lightboxNext.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navigateGallery(1);
+      });
+      
+      // Fungsi untuk navigasi antar gambar
+      function navigateGallery(direction) {
+        currentIndex = (currentIndex + direction + galleryItems.length) % galleryItems.length;
+        
+        // Menemukan item yang tidak terfilter
+        let visibleItems = Array.from(galleryItems).filter(item => 
+          window.getComputedStyle(item).display !== 'none' && 
+          item.getAttribute('data-category') !== 'video'
+        );
+        
+        if (visibleItems.length > 0) {
+          // Hitung indeks yang ditampilkan
+          let visibleIndex = currentIndex % visibleItems.length;
+          openLightbox(visibleItems[visibleIndex]);
+        }
+      }
+      
+      // Menambahkan navigasi keyboard
+      document.addEventListener('keydown', (e) => {
+        if (lightbox.style.display === 'flex') {
+          if (e.key === 'Escape') {
+            closeLightbox();
+          } else if (e.key === 'ArrowLeft') {
+            navigateGallery(-1);
+          } else if (e.key === 'ArrowRight') {
+            navigateGallery(1);
+          }
+        }
+      });
+    });
+  </script>

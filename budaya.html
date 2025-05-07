@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>Budaya Minangkabau - Gebu Minang Jawa Timur</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Additional styles specific to Budaya page */
+    .culture-hero {
+      background-image: url('https://s3-ap-southeast-1.amazonaws.com/arsitagx-master-article/article-photo/109/unnamed.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 100px 20px;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+    
+    .culture-hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+    
+    .culture-hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      z-index: 2;
+      position: relative;
+    }
+    
+    .culture-category {
+      margin: 50px 0;
+    }
+    
+    .culture-item {
+      display: flex;
+      margin-bottom: 40px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .culture-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+    
+    .culture-image {
+      flex: 0 0 40%;
+    }
+    
+    .culture-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .culture-info {
+      flex: 0 0 60%;
+      padding: 30px;
+    }
+    
+    .culture-info h3 {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+    
+    .culture-info p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+    
+    .culture-categories {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+    
+    .culture-category-button {
+      background-color: #f5f5f5;
+      border: none;
+      color: #333;
+      padding: 10px 20px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .culture-category-button:hover,
+    .culture-category-button.active {
+      background-color: #6c757d;
+      color: white;
+    }
+    
+    .filosofi-container {
+      background-color: #f9f7f2;
+      padding: 40px;
+      border-radius: 10px;
+      margin: 50px 0;
+    }
+    
+    .filosofi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    
+    .filosofi-card {
+      background-color: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+    
+    .filosofi-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .filosofi-card h3 {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+    
+    .filosofi-card p {
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    .filosofi-icon {
+      font-size: 2.5rem;
+      color: #6c757d;
+      margin-bottom: 15px;
+    }
+    
+    @media (max-width: 768px) {
+      .culture-item, 
+      .culture-item:nth-child(even) {
+        flex-direction: column;
+      }
+      
+      .culture-image {
+        flex: 0 0 200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <nav>
+    <div class="container">
+      <div class="nav-content">
+        <div class="logo">
+            <img alt="Rumah Gadang logo" src="logo-removebg-preview.png"/>
+          <h1>GEBU MINANG JAWA TIMUR</h1>
+        </div>
+
+        <div class="desktop-menu">
+          <ul>
+            <li><a href="index.html">BERANDA</a></li>
+            <li><a href="sejarah.html">SEJARAH</a></li>
+            <li><a href="budaya.html">BUDAYA</a></li>
+            <li><a href="pengurus.html">PENGURUS</a></li>
+            <li><a href="galeri.html">GALERI</a></li>
+            <li><a href="kontak.html">KONTAK</a></li>
+          </ul>
+        </div>
+
+        <div class="mobile-menu-button">
+          <button id="mobile-menu-button">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu">
+        <ul>
+          <li><a href="index.html">BERANDA</a></li>
+          <li><a href="sejarah.html">SEJARAH</a></li>
+          <li><a href="budaya.html">BUDAYA</a></li>
+          <li><a href="pengurus.html">PENGURUS</a></li>
+          <li><a href="galeri.html">GALERI</a></li>
+          <li><a href="kontak.html">KONTAK</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <script src="menu.js"></script>
+  
+  <div class="news-ticker-wrapper">
+    <div class="news-ticker">
+      <span>🏠 RUMAH GADANG: KEBANGGAAN MINANGKABAU</span>
+      <span>🏠 KUNJUNGI RUMAH GADANG MINANG SURABAYA</span>
+      <span>🏠 MELESTARIKAN WARISAN BUDAYA INDONESIA</span>
+      <span>🏠 RUMAH ADAT DENGAN ARSITEKTUR UNIK</span>
+      <span>🏠 MENGENAL BUDAYA MATRILINEAL MINANGKABAU</span>
+    </div>
+  </div>
+
+  <div class="culture-hero">
+    <div class="culture-hero-content">
+      <h1>BUDAYA MINANGKABAU</h1>
+      <p>Mengenal kekayaan tradisi dan nilai-nilai luhur budaya Minangkabau yang telah bertahan selama berabad-abad</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>KEBUDAYAAN MINANGKABAU</h2>
+        <div class="divider"></div>
+      </div>
+      
+      <p class="section-intro">
+        Minangkabau memiliki beragam kekayaan budaya yang tersebar dalam bentuk adat istiadat, kesenian, kuliner, dan sistem sosial yang unik. Budaya Minangkabau dikenal karena sifatnya yang terbuka namun tetap mempertahankan nilai-nilai tradisional. Sistem matrilineal yang dianut masyarakat Minangkabau menjadi salah satu keunikan tersendiri yang membedakannya dari budaya lain di Indonesia.
+      </p>
+
+      <div class="culture-categories">
+        <button class="culture-category-button active">Semua</button>
+        <button class="culture-category-button">Adat Istiadat</button>
+        <button class="culture-category-button">Seni Tari</button>
+        <button class="culture-category-button">Kuliner</button>
+        <button class="culture-category-button">Bahasa & Sastra</button>
+        <button class="culture-category-button">Arsitektur</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="culture-category" id="adat-istiadat">
+    <div class="container">
+      <div class="section-header">
+        <h2>ADAT ISTIADAT</h2>
+        <div class="divider"></div>
+      </div>
+      
+      <div class="culture-item">
+        <div class="culture-image">
+          <img src="https://image.popbela.com/content-images/post/20220621/morden-co-db74db55d47b9a180a5a8d36a6ea383e.jpg?width=1600&format=webp&w=1600" alt="Adat Perkawinan Minangkabau">
+        </div>
+        <div class="culture-info">
+          <h3>Adat Perkawinan</h3>
+          <p>Perkawinan dalam adat Minangkabau memiliki tahapan yang panjang, mulai dari maresek (penjajakan), maminang (melamar), hingga baralek (pesta pernikahan). Uniknya, pihak perempuan yang meminang pihak laki-laki, berbeda dengan adat kebanyakan di Indonesia.</p>
+          <p>Dalam prosesi pernikahan, mempelai wanita diantar ke rumah mempelai pria untuk menjemput mempelai pria yang kemudian dibawa ke rumah gadang keluarga mempelai wanita. Ini mencerminkan sistem matrilineal yang dianut masyarakat Minangkabau.</p>
+        </div>
+      </div>
+      
+      <div class="culture-item">
+        <div class="culture-image">
+          <img src="https://asset.kompas.com/crops/vYTdtNWAkYYoas-wNMgYlmMwM4g=/1x3:990x662/750x500/data/photo/2022/02/07/6200fb984a54d.jpg" alt="Sistem Matrilineal Minangkabau">
+        </div>
+        <div class="culture-info">
+          <h3>Sistem Matrilineal</h3>
+          <p>Minangkabau merupakan salah satu suku di dunia yang menganut sistem matrilineal terbesar. Dalam sistem ini, garis keturunan dan pewarisan harta pusaka ditentukan dari pihak ibu. Seorang anak akan mengikuti suku ibunya, bukan ayahnya.</p>
+          <p>Rumah gadang menjadi simbol dari sistem matrilineal ini, di mana perempuan memiliki kamar-kamar di dalam rumah gadang, sementara laki-laki tidur di surau atau di rumah istrinya setelah menikah. Meski menganut sistem matrilineal, pengambilan keputusan tetap melibatkan kaum laki-laki sebagai mamak (paman dari pihak ibu).</p>
+        </div>
+      </div>
+      
+      <div class="culture-item">
+        <div class="culture-image">
+          <img src="https://pratamamedia.com/wp-content/uploads/2021/03/002-suku-minangkabau-sumber-saribundo.biz_.jpg" alt="Sistem Kekerabatan Minangkabau">
+        </div>
+        <div class="culture-info">
+          <h3>Sistem Kekerabatan</h3>
+          <p>Masyarakat Minangkabau mengenal sistem kekerabatan yang unik, yaitu 'suku' sebagai satuan genealogis. Setiap orang Minangkabau harus memiliki suku yang diwariskan dari ibunya. Terdapat empat suku utama: Koto, Piliang, Bodi, dan Chaniago.</p>
+          <p>Dalam struktur adat, terdapat beberapa peran penting seperti Penghulu (pemimpin adat), Malin (pemimpin agama), Dubalang (penjaga keamanan), dan Bundo Kanduang (pemimpin perempuan). Masing-masing memiliki tugas dan wewenang dalam menjaga keseimbangan adat dan agama.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="filosofi-container">
+    <div class="container">
+      <div class="section-header">
+        <h2>FILOSOFI ALAM TAKAMBANG JADI GURU</h2>
+        <div class="divider"></div>
+      </div>
+      
+      <p class="section-intro">
+        Filosofi "Alam Takambang Jadi Guru" (Alam Terkembang Menjadi Guru) menjadi landasan dalam kehidupan masyarakat Minangkabau. Filosofi ini mengajarkan bahwa alam semesta menjadi sumber pembelajaran dan kebijaksanaan dalam kehidupan.
+      </p>
+      
+      <div class="filosofi-grid">
+        <div class="filosofi-card">
+          <div class="filosofi-icon">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <h3>Keseimbangan</h3>
+          <p>Seperti alam yang selalu mencari keseimbangan, masyarakat Minangkabau mengajarkan keseimbangan dalam kehidupan, antara hak dan kewajiban, antara adat dan agama (adat basandi syara', syara' basandi kitabullah).</p>
+        </div>
+        
+        <div class="filosofi-card">
+          <div class="filosofi-icon">
+            <i class="fas fa-hand-holding-heart"></i>
+          </div>
+          <h3>Musyawarah</h3>
+          <p>Tercermin dalam pepatah "bulek air di pembuluh, bulek kato di mufakat" (bulat air karena pembuluh, bulat kata karena mufakat), mengajarkan pentingnya musyawarah dalam mengambil keputusan.</p>
+        </div>
+        
+        <div class="filosofi-card">
+          <div class="filosofi-icon">
+            <i class="fas fa-people-arrows"></i>
+          </div>
+          <h3>Adaptasi</h3>
+          <p>Falsafah "dimana bumi dipijak, di situ langit dijunjung" mengajarkan kemampuan beradaptasi dengan lingkungan baru tanpa kehilangan identitas asli.</p>
+        </div>
+        
+        <div class="filosofi-card">
+          <div class="filosofi-icon">
+            <i class="fas fa-tree"></i>
+          </div>
+          <h3>Keberlanjutan</h3>
+          <p>Prinsip "nan batuah dipaliharakan, nan layua dibuangkan" (yang bertuah dipelihara, yang layu dibuang) mengajarkan untuk mempertahankan yang baik dan meninggalkan yang buruk.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="culture-category" id="seni-tari">
+    <div class="container">
+      <div class="section-header">
+        <h2>SENI TARI & MUSIK</h2>
+        <div class="divider"></div>
+      </div>
+      
+      <div class="culture-item">
+        <div class="culture-image">
+          <img src="https://mundomaya.travel/wp-content/uploads/2021/07/tari-piring.jpg" alt="Tari Piring">
+        </div>
+        <div class="culture-info">
+          <h3>Tari Piring</h3>
+          <p>Tari Piring merupakan salah satu tarian tradisional Minangkabau yang sudah terkenal hingga ke mancanegara. Tarian ini menampilkan keahlian penari dalam menggunakan piring sebagai properti utama, bahkan terkadang menari di atas pecahan kaca.</p>
+          <p>Tari ini menggambarkan kegembiraan masyarakat setelah musim panen berhasil dan rasa syukur kepada Tuhan atas rezeki yang dilimpahkan. Gerakan-gerakan para penari yang lincah dan cepat menunjukkan kelincahan dan ketangkasan masyarakat Minangkabau.</p>
+        </div>
+      </div>
+      
+      <div class="culture-item">
+        <div class="culture-image">
+          <img src="https://seringjalan.com/wp-content/uploads/2020/05/Tari-Pasambahan-Minang.jpg" alt="Tari Pasambahan">
+        </div>
+        <div class="culture-info">
+          <h3>Tari Pasambahan</h3>
+          <p>Tari Pasambahan adalah tarian sambutan untuk menyambut tamu yang datang ke Minangkabau. Dalam tarian ini disajikan sirih dalam cerano (tempat sirih) sebagai simbol penghormatan kepada tamu.</p>
+          <p>Gerakan tarian ini lebih lembut dan anggun, mencerminkan kehalusan budi pekerti masyarakat Minangkabau dalam menyambut tamu. Tarian ini sering ditampilkan pada acara-acara adat dan penyambutan tamu kehormatan.</p>
+        </div>
+      </div>
+      
+      <div class="culture-item">
+        <div class="culture-image">
+          <img src="https://th.bing.com/th/id/R.eed107666e9817167ac70ce4a9901854?rik=VOfro19PUY%2b7mg&riu=http%3a%2f%2f1.bp.blogspot.com%2f-tuu5Eu7TJtg%2fUIdGW0gg49I%2fAAAAAAAAAZU%2fZjjFDstr3Rs%2fs1600%2ftalempong3.jpg&ehk=bdWop36ISITY3A1XPofLZA2G4SdyphmYc67%2b33uPdNA%3d&risl=&pid=ImgRaw&r=0" alt="Talempong">
+        </div>
+        <div class="culture-info">
+          <h3>Talempong & Saluang</h3>
+          <p>Talempong adalah alat musik pukul berbentuk gong kecil yang terbuat dari logam. Biasanya dimainkan bersamaan dalam ansambel. Musik talempong sering digunakan untuk mengiringi tarian-tarian Minangkabau dan acara-acara adat.</p>
+          <p>Saluang, di sisi lain, adalah alat musik tiup tradisional yang terbuat dari bambu. Saluang sering dimainkan untuk mengiringi dendang (nyanyian tradisional Minangkabau) dan kesenian rabab (semacam biola tradisional).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="culture-category" id="kuliner">
+    <div class="container">
+      <div class="section-header">
+        <h2>KULINER</h2>
+        <div class="divider"></div>
+      </div>
+      
+      <div class="culture-item">
+        <div class="culture-image">
+          <img src="https://th.bing.com/th/id/OIP.59aBRYNDbKnPXc7FZ4eNDAHaHa?cb=iwc1&rs=1&pid=ImgDetMain" alt="Rendang">
+        </div>
+        <div class="culture-info">
+          <h3>Rendang</h3>
+          <p>Rendang adalah masakan daging yang dihasilkan dari proses memasak yang lama dengan menggunakan berbagai rempah-rempah dan santan. Makanan ini dikenal sebagai salah satu hidangan terenak di dunia dan bahkan diakui oleh UNESCO sebagai Warisan Budaya Takbenda.</p>
+          <p>Rendang tidak hanya sekadar makanan, tapi juga memiliki filosofi dalam budaya Minangkabau. Proses pembuatannya yang lama mencerminkan kesabaran, dan daya tahan rendang yang bisa bertahan lama merupakan simbol ketahanan dan kebijaksanaan orang Minang.</p>
+        </div>
+      </div>
+      
+      <div class="culture-item">
+        <div class="culture-image">
+          <img src="https://static.vecteezy.com/system/resources/thumbnails/015/958/593/small_2x/sate-padang-or-satay-padang-is-spicy-beef-satay-from-padang-west-sumatra-served-with-spicy-curry-sauce-and-rice-cake-lontong-on-banana-leaf-isolated-on-white-background-photo.jpg" alt="Sate Padang">
+        </div>
+        <div class="culture-info">
+          <h3>Sate Padang</h3>
+          <p>Sate Padang adalah jenis sate yang berasal dari Padang, Sumatera Barat. Umumnya menggunakan daging sapi sebagai bahan utama dan disajikan dengan kuah kuning berbumbu yang khas dan menggugah selera.</p>
+          <p>Terdapat beberapa variasi Sate Padang, seperti Sate Padang Pariaman dan Sate Padang Panjang, yang memiliki ciri khas tersendiri dalam bumbu dan penyajiannya. Sate Padang merupakan salah satu kuliner Minangkabau yang paling populer di Indonesia.</p>
+        </div>
+      </div>
+      
+      <div class="culture-item">
+        <div class="culture-image">
+          <img src="https://d2ezn1w0s7v0bc.cloudfront.net/wp-content/uploads/2022/11/30104328/Wakeup-Canva-Featured-Image-23-750x375.png" alt="Nasi Kapau">
+        </div>
+        <div class="culture-info">
+          <h3>Nasi Kapau</h3>
+          <p>Nasi Kapau adalah hidangan nasi dengan berbagai lauk yang berasal dari Nagari Kapau, Kabupaten Agam. Berbeda dengan nasi Padang yang disajikan dalam bentuk hidangan siap santap, nasi Kapau biasanya ditata dalam etalase dan pembeli dapat memilih lauk yang diinginkan.</p>
+          <p>Lauk khas nasi Kapau antara lain gulai kapau (gulai nangka), gulai tambusu (usus sapi berisi telur), gulai tunjang (kaki sapi), dan berbagai jenis pangek (hidangan berkuah kental dengan bumbu cabai).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="culture-category" id="bahasa-sastra">
+    <div class="container">
+      <div class="section-header">
+        <h2>BAHASA & SASTRA</h2>
+        <div class="divider"></div>
+      </div>
+      
+      <div class="culture-item">
+        <div class="culture-image">
+          <img src="https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2024/12/03/2519480000.jpg" alt="Pepatah Minang">
+        </div>
+        <div class="culture-info">
+          <h3>Pepatah & Pantun</h3>
+          <p>Masyarakat Minangkabau dikenal memiliki tradisi bertutur yang kaya, tercermin dalam pepatah-petitih dan pantun. Pepatah Minang sering digunakan sebagai pedoman hidup dan berisi ajaran moral yang dalam, seperti "Nan kuriak kundi, nan merah sago; nan baiek budi, nan indah baso" (Yang kurik kundi, yang merah saga; yang baik budi, yang indah bahasa).</p>
+          <p>Pantun Minang juga menjadi sarana komunikasi yang sarat makna. Dalam acara adat, pantun sering digunakan dalam dialog antar pihak, terutama dalam prosesi pernikahan atau musyawarah adat.</p>
+        </div>
+      </div>
+      
+      <div class="culture-item">
+        <div class="culture-image">
+          <img src="https://cdngnfi2.sgp1.digitaloceanspaces.com/gnfi/uploads/articles/kaba-minangkabau-e31bb8f062456b37b6a81edbdc954808.png" alt="Kaba Minangkabau">
+        </div>
+        <div class="culture-info">
+          <h3>Kaba</h3>
+          <p>Kaba adalah cerita rakyat Minangkabau yang biasanya disampaikan dalam bentuk nyanyian dengan iringan alat musik tradisional seperti saluang atau rabab. Kaba berisi kisah-kisah heroik, romantis, atau mengandung pembelajaran hidup.</p>
+          <p>Beberapa kaba terkenal antara lain Kaba Anggun Nan Tongga, Kaba Cindua Mato, dan Kaba Malin Kundang. Setiap kaba memiliki pesan moral dan mencerminkan nilai-nilai yang dianut masyarakat Minangkabau.</p>
+        </div>
+      </div>
+      
+      <div class="culture-item">
+        <div class="culture-image">
+          <img src="https://kfmap.asia/storage/thumbs/storage/photos/ID.SUM.AP.PDG/ID.SUM.AP.PDG_3.png" alt="Bahasa Minangkabau">
+        </div>
+        <div class="culture-info">
+          <h3>Bahasa Minangkabau</h3>
+          <p>Bahasa Minangkabau adalah bahasa Austronesia yang digunakan oleh suku Minangkabau. Bahasa ini memiliki beberapa dialek seperti dialek Tanah Datar, Agam, dan Lima Puluh Kota yang memiliki perbedaan dalam pelafalan dan kosakata.</p>
+          <p>Dalam bahasa Minangkabau, terdapat tingkatan bahasa yang menunjukkan sopan santun, yaitu bahasa mandaki (bahasa halus untuk orang yang dihormati), bahasa malereang (bahasa netral), dan bahasa manurun (bahasa kasar). Tingkatan ini mencerminkan pentingnya adab dalam berkomunikasi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="culture-category" id="arsitektur">
+    <div class="container">
+      <div class="section-header">
+        <h2>ARSITEKTUR</h2>
+        <div class="divider"></div>
+      </div>
+      
+      <div class="culture-item">
+        <div class="culture-image">
+          <img src="https://www.ruparupa.com/blog/wp-content/uploads/2020/10/Screen-Shot-2020-10-05-at-11.01.27.png" alt="Rumah Gadang">
+        </div>
+        <div class="culture-info">
+          <h3>Rumah Gadang</h3>
+          <p>Rumah Gadang merupakan rumah adat Minangkabau yang paling ikonik dengan bentuk atapnya yang menyerupai tanduk kerbau (gonjong). Bangunan ini dibangun dengan konsep yang mencerminkan nilai-nilai yang dianut masyarakat Minangkabau.</p>
+          <p>Rumah Gadang dibangun tinggi dengan tiang-tiang untuk menghindari banjir dan serangan binatang buas. Struktur bangunan dibuat tanpa menggunakan paku, melainkan menggunakan sistem pasak dan ikatan yang mencerminkan kecerdasan arsitektur tradisional.</p>
+        </div>
+      </div>
+      
+      <div class="culture-item">
+        <div class="culture-image">
+          <img src="https://photo980x880.mnstatic.com/7c1c87d2f10a80b9f7b615d0a39acffa/palacio-de-istano-basa-pagaruyung-8821868.jpg" alt="Rangkiang">
+        </div>
+        <div class="culture-info">
+          <h3>Rangkiang</h3>
+          <p>Rangkiang adalah lumbung padi tradisional Minangkabau yang biasanya dibangun di halaman depan Rumah Gadang. Bentuknya menyerupai Rumah Gadang namun dengan ukuran lebih kecil dan memiliki fungsi sebagai tempat penyimpanan padi.</p>
+          <p>Terdapat beberapa jenis rangkiang berdasarkan fungsinya, seperti rangkiang sitinjau lauik (untuk keperluan sehari-hari), rangkiang sibayau-bayau (untuk keperluan adat), rangkiang sitangka lapa (untuk masa paceklik), dan rangkiang kaciak (untuk bibit padi). Keberadaan rangkiang mencerminkan kearifan masyarakat dalam manajemen pangan.</p>
+        </div>
+      </div>
+      
+      <div class="culture-item">
+        <div class="culture-image">
+          <img src="https://hidayatullah.com/wp-content/uploads/2024/01/Surau-di-Minangkabau.jpg" alt="Surau">
+        </div>
+        <div class="culture-info">
+          <h3>Surau</h3>
+          <p>Surau adalah bangunan tradisional yang berfungsi sebagai tempat ibadah dan pendidikan agama Islam. Dalam konteks budaya Minangkabau, surau juga menjadi tempat bermalam bagi laki-laki yang belum menikah atau yang sudah menikah namun sedang tidak bersama istrinya.</p>
+    
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                  const buttons = document.querySelectorAll('.culture-category-button');
+                  const sectionIds = [
+                    'adat-istiadat',
+                    'seni-tari',
+                    'kuliner',
+                    'bahasa-sastra',
+                    'arsitektur'
+                  ];
+              
+                  buttons.forEach((button, index) => {
+                    button.addEventListener('click', () => {
+                      // Remove 'active' class from all buttons
+                      buttons.forEach(btn => btn.classList.remove('active'));
+                      button.classList.add('active');
+              
+                      // Scroll to section if not "Semua"
+                      if (index === 0) {
+                        window.scrollTo({
+                          top: 0,
+                          behavior: 'smooth'
+                        });
+                      } else {
+                        const targetSection = document.getElementById(sectionIds[index - 1]);
+                        if (targetSection) {
+                          targetSection.scrollIntoView({
+                            behavior: 'smooth'
+                          });
+                        }
+                      }
+                    });
+                  });
+                });
+              </script>
+              
+            
